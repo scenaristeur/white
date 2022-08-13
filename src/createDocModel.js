@@ -6,7 +6,9 @@ let awareness = {}
 
 const getDoc = id => {
   const ydoc = new Y.Doc();
-  const providerWebsocket = new WebsocketProvider(`wss:yjs-demos.now.sh`, id, ydoc);
+  // const providerWebsocket = new WebsocketProvider(`wss:yjs-demos.now.sh`, id, ydoc);
+  const providerWebsocket = new WebsocketProvider(`wss://demos.yjs.dev`, id, ydoc);
+
   // const provider = new WebsocketProvider(`wss:yjs-demos.now.sh`, id, ydoc);
   // const providerWebrtc = new WebrtcProvider(id, ydoc)
 // providers.push(providerWebsocket)
