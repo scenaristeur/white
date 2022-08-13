@@ -24,3 +24,5 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 - https://codesandbox.io/s/yjs-vue-example-9blmo?file=/src/createDocModel.js
+
+more : vue js desktop yboard https://github.com/felipeleivav/yboard?ref=vuejsexamples.com

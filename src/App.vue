@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <GraphView />
     <ListExample/>
     wss
   </div>
@@ -11,7 +12,8 @@ import ListExample from "./YListExample";
 export default {
   name: "App",
   components: {
-    ListExample
+    ListExample,
+    'GraphView': ()=>import('@/views/GraphView'),
   }
 };
 </script>
