@@ -126,13 +126,28 @@ const plugin = {
           // console.log("position changed in object");
           // console.log(o);
           let position = store.state.core.graph.cameraPosition()
-          console.log(position)
+          // console.log(position)
           store.commit ('core/setCameraPosition', position)
         }
 
         let controls = graph.controls()
         console.log(controls)
         controls.addEventListener('change', onPositionChange);
+
+        //add camera
+        // const planeGeometry = new THREE.PlaneGeometry(1000, 1000, 1, 1);
+        // const planeMaterial = new THREE.MeshLambertMaterial({color: 0xFF0000, side: THREE.DoubleSide});
+        // const mesh = new THREE.Mesh(planeGeometry, planeMaterial);
+        // mesh.position.set(-100, -200, -100);
+        // mesh.rotation.set(0.5 * Math.PI, 0, 0);
+        //
+        // graph.scene().add(mesh);
+        //
+        //
+        // const geometry = new THREE.BoxGeometry( 20, 20, 20 );
+        // const object = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial( { color: Math.random() * 0xffffff } ) );
+        // object.position.set(-100, -200, -100);
+        // graph.scene().add(object);
 
 
         // console.log(graph)

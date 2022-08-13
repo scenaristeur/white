@@ -15,7 +15,11 @@ export default {
   components: { ContentBlock },
   data() {
     const model = createDocModel("drawing");
+    console.log(model)
     const doc = model.doc;
+    // let providers = model.providers
+    //console.log("providers",providers)
+    this.$store.commit('core/setAwareness', model.awareness)
     const content = doc.getArray("drawing");
     const contentArray = content.toArray();
     content.observe(event => {
