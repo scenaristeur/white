@@ -40,7 +40,7 @@ const mutations = {
   setAwareness(state, a){
     console.log("awareness",a)
     state.awareness = a
-    state.user = {name: 'user_'+Date.now(), color: '#'+Math.floor(Math.random()*16777215).toString(16)}
+    state.user = {id: uuidv4(), name: 'user_'+Date.now(), color: '#'+Math.floor(Math.random()*16777215).toString(16)}
     // state.awareness.websocket.setLocalStateField('user', {
     //   // Define a print name that should be displayed
     //   name: state.user,
@@ -60,14 +60,30 @@ const mutations = {
       // console.log(changes)
       // Whenever somebody updates their awareness information,
       // we log all awareness information from all users.
-      console.log("websocket",Array.from(a.websocket.getStates().values()))
+
+      Array.from(a.websocket.getStates().values()).forEach((user) => {
+
+        let u = user.user
+        if(u!= undefined && u.id != state.user.id){
+        //  console.log(u)
+          var index = state.nodes.findIndex(x => x.id == u.id);
+
+          index === -1 ? state.nodes.push(u) : Object.assign(state.nodes[index], u)
+          //console.log(state.nodes[index])
+          state.graph.graphData({nodes: state.nodes, links: state.links})
+        }
+      });
+
+
+
+      // console.log("websocket",Array.from(a.websocket.getStates().values()))
     })
-    a.webrtc.on('change',/* changes*/() => {
-      // console.log(changes)
-      // Whenever somebody updates their awareness information,
-      // we log all awareness information from all users.
-      console.log("webrtc",Array.from(a.webrtc.getStates().values()))
-    })
+    // a.webrtc.on('change',/* changes*/() => {
+    //   // console.log(changes)
+    //   // Whenever somebody updates their awareness information,
+    //   // we log all awareness information from all users.
+    //   console.log("webrtc",Array.from(a.webrtc.getStates().values()))
+    // })
 
 
   },
@@ -77,25 +93,20 @@ const mutations = {
   // },
   setCameraPosition(state, cp){
     state.cameraPosition = cp
-    state.user.position = cp
+    state.user.fx = cp.x
+    state.user.fy = cp.y
+    state.user.fz = cp.z
     // You can think of your own awareness information as a key-value store.
     // We update our "user" field to propagate relevant user information.
-    state.awareness.websocket.setLocalStateField('user', {
-      // Define a print name that should be displayed
-      //  name: 'user_'+Date.now(),
-      user: state.user
+    state.awareness.websocket.setLocalStateField('user', state.user)
 
-      // Define a color that should be associated to the user:
-      //color: Math.random() * 0xffffff //'#ffb61e' // should be a hex color
-    })
-
-    state.awareness.webrtc.setLocalStateField('user', {
-      // Define a print name that should be displayed
-      //  name: 'user_'+Date.now(),
-      user: state.user
-      // Define a color that should be associated to the user:
-      //color: Math.random() * 0xffffff //'#ffb61e' // should be a hex color
-    })
+    // state.awareness.webrtc.setLocalStateField('user', {
+    //   // Define a print name that should be displayed
+    //   //  name: 'user_'+Date.now(),
+    //   user: state.user
+    //   // Define a color that should be associated to the user:
+    //   //color: Math.random() * 0xffffff //'#ffb61e' // should be a hex color
+    // })
 
 
 

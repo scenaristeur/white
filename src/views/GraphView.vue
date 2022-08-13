@@ -9,7 +9,7 @@
 export default {
   name: 'GraphView',
   created(){
-    const N = 300;
+    const N = 10;
     let  nodes= [...Array(N).keys()].map(i => ({ id: i }))
     let links =  [...Array(N).keys()]
     .filter(id => id)
@@ -40,6 +40,7 @@ export default {
   },
   watch:{
     nodes(){
+      console.log("nodes",this.nodes)
       this.update()
     },
     links(){

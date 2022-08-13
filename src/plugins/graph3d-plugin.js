@@ -1,7 +1,7 @@
 import ForceGraph3D from '3d-force-graph';
-import {CSS2DRenderer, CSS2DObject} from 'three/examples/jsm/renderers/CSS2DRenderer.js';
+import {CSS2DRenderer/*, CSS2DObject*/} from 'three/examples/jsm/renderers/CSS2DRenderer.js';
 import SpriteText from 'three-spritetext';
-import * as THREE from 'three';
+// import * as THREE from 'three';
 
 // let selectedNodes = new Set(),
 // let highlightNodes = new Set(),
@@ -62,8 +62,8 @@ const plugin = {
         //.onBackgroundClick(event => onBackgroundClick(event))
         .onNodeClick(node => onNodeClick(node))
         .onLinkClick(ln => onLinkClick(ln))
-        .nodeThreeObjectExtend(node => node.shape == undefined || node.shape == null)
-        .nodeThreeObject(node => nodeThreeObject(node))
+        // .nodeThreeObjectExtend(node => node.shape == undefined || node.shape == null)
+        // .nodeThreeObject(node => nodeThreeObject(node))
         // .nodeThreeObject(node => nodeThreeObjectGroup(node))
         .linkCurvature('curvature')
         .linkCurveRotation('rotation')
@@ -208,78 +208,78 @@ const plugin = {
       }
 
 
-      function nodeThreeObject(node){
-        let shape = null
-        let geometry = null
-        let material =   new THREE.MeshLambertMaterial({
-          color: node.color ||Math.round(Math.random() * Math.pow(2, 24)),
-          transparent: true,
-          opacity: 0.75
-        })
-        let image, texture, sprite = null
-        // console.log(material)
-        // console.log(node.shape)
-        switch (node.shape) {
-          case "box":
-          geometry = new THREE.BoxGeometry( 20,  20,  20)
-          break;
-          case "cylinder":
-          geometry = new THREE.CylinderGeometry( 10,  10,  20)
-          break;
-          case "cone":
-          geometry = new THREE.ConeGeometry( 10,  20)
-          break;
-          case "dodecahedron":
-          geometry = new THREE.DodecahedronGeometry( 10)
-          break;
-          case "sphere":
-          geometry = new THREE.SphereGeometry( 10)
-          break;
-          case "torus":
-          geometry = new THREE.TorusGeometry( 10,  2)
-          break;
-          case "torusKnot":
-          geometry = new THREE.TorusKnotGeometry( 10,  2)
-          break;
-          case "base64":
-          //  console.log("base64",node)
-          image = new Image();
-          image.src = node.base64;
-          texture = new THREE.Texture();
-          texture.image = image;
-          image.onload = function () {
-            texture.needsUpdate = true;
-          };
-          material = new THREE.SpriteMaterial({ map: texture });
-          sprite = new THREE.Sprite(material);
-          sprite.scale.set(2, 2);
-          //return sprite;
-          break;
-          default:
-          //  geometry = null
-
-        }
-        if (sprite != null){
-          shape = sprite
-          //  console.log("sprite", shape)
-        }else{
-          if(geometry == null){
-            const nodeEl = document.createElement('div');
-            nodeEl.textContent = node.name //node.id;
-            nodeEl.style.color = node.color || "#ffffff";
-            nodeEl.className = 'node-label';
-            shape = new CSS2DObject(nodeEl);
-            // console.log(shape)
-            // nodeEl.addEventListener('pointerdown', () => {
-            //   alert(1)
-            //   console.log(shape)
-            //  })
-          }else{
-            shape = new THREE.Mesh(geometry, material)
-          }
-        }
-        return shape
-      }
+      // function nodeThreeObject(node){
+      //   let shape = null
+      //   let geometry = null
+      //   let material =   new THREE.MeshLambertMaterial({
+      //     color: node.color ||Math.round(Math.random() * Math.pow(2, 24)),
+      //     transparent: true,
+      //     opacity: 0.75
+      //   })
+      //   let image, texture, sprite = null
+      //   // console.log(material)
+      //   // console.log(node.shape)
+      //   switch (node.shape) {
+      //     case "box":
+      //     geometry = new THREE.BoxGeometry( 20,  20,  20)
+      //     break;
+      //     case "cylinder":
+      //     geometry = new THREE.CylinderGeometry( 10,  10,  20)
+      //     break;
+      //     case "cone":
+      //     geometry = new THREE.ConeGeometry( 10,  20)
+      //     break;
+      //     case "dodecahedron":
+      //     geometry = new THREE.DodecahedronGeometry( 10)
+      //     break;
+      //     case "sphere":
+      //     geometry = new THREE.SphereGeometry( 10)
+      //     break;
+      //     case "torus":
+      //     geometry = new THREE.TorusGeometry( 10,  2)
+      //     break;
+      //     case "torusKnot":
+      //     geometry = new THREE.TorusKnotGeometry( 10,  2)
+      //     break;
+      //     case "base64":
+      //     //  console.log("base64",node)
+      //     image = new Image();
+      //     image.src = node.base64;
+      //     texture = new THREE.Texture();
+      //     texture.image = image;
+      //     image.onload = function () {
+      //       texture.needsUpdate = true;
+      //     };
+      //     material = new THREE.SpriteMaterial({ map: texture });
+      //     sprite = new THREE.Sprite(material);
+      //     sprite.scale.set(2, 2);
+      //     //return sprite;
+      //     break;
+      //     default:
+      //     //  geometry = null
+      //
+      //   }
+      //   if (sprite != null){
+      //     shape = sprite
+      //     //  console.log("sprite", shape)
+      //   }else{
+      //     if(geometry == null){
+      //       const nodeEl = document.createElement('div');
+      //       nodeEl.textContent = node.name //node.id;
+      //       nodeEl.style.color = node.color || "#ffffff";
+      //       nodeEl.className = 'node-label';
+      //       shape = new CSS2DObject(nodeEl);
+      //       // console.log(shape)
+      //       // nodeEl.addEventListener('pointerdown', () => {
+      //       //   alert(1)
+      //       //   console.log(shape)
+      //       //  })
+      //     }else{
+      //       shape = new THREE.Mesh(geometry, material)
+      //     }
+      //   }
+      //   return shape
+      // }
 
 
       // function nodeThreeObjectGroup(node){
