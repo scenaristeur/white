@@ -22,3 +22,5 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+- https://codesandbox.io/s/yjs-vue-example-9blmo?file=/src/createDocModel.js

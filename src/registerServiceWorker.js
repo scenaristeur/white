@@ -21,6 +21,7 @@ if (process.env.NODE_ENV === 'production') {
     },
     updated () {
       console.log('New content is available; please refresh.')
+      alert('White has been updated, Please close & reopen the app !')
     },
     offline () {
       console.log('No internet connection found. App is running in offline mode.')

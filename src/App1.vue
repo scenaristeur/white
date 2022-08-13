@@ -5,11 +5,13 @@
 </template>
 
 <script>
+import HelloWorld from "./components/HelloWorld";
 import ListExample from "./YListExample";
 
 export default {
   name: "App",
   components: {
+    HelloWorld,
     ListExample
   }
 };
