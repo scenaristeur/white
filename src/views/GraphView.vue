@@ -1,16 +1,45 @@
 <template>
   <div class="graph-view">
+    <!-- e{{contentArray}}r -->
+    <ShowPositions :brains="contentArray" />
     <div id="graph" width="100px" ref="graph">Loading graph...</div>
     {{cameraPosition}}
   </div>
 </template>
 
 <script>
+import createDocModel from "../createDocModel";
+// import * as Y from "yjs";
+
 export default {
   name: 'GraphView',
+  components: {
+    'ShowPositions': ()=>import('@/views/ShowPositions'),
+  },
+  data(){
+    return{
+      contentArray: null
+    }
+  },
   created(){
+
+
+    const model = createDocModel("drawing");
+    console.log(model)
+    const doc = model.doc;
+    // let providers = model.providers
+    //console.log("providers",providers)
+    this.$store.commit('core/setAwareness', model.awareness)
+    const content = doc.getArray("drawing");
+    this.contentArray = content.toArray();
+    content.observe(event => {
+      console.log("event", event, event.changes.delta);
+      this.contentArray = content.toArray();
+      this.$store.commit('core/onContentArrayChange', this.contentArray)
+    });
+
     const N = 10;
-    let  nodes= [...Array(N).keys()].map(i => ({ id: i }))
+    let  nodes= [...Array(N).keys()].map(i => ({ id: i, name: i, color: this.$store.state.core.user.color }))
     let links =  [...Array(N).keys()]
     .filter(id => id)
     .map(id => ({
@@ -20,6 +49,18 @@ export default {
 
     this.$store.commit('core/setNodes', nodes)
     this.$store.commit('core/setLinks', links)
+
+    // let brain = new Y.Array();
+    // console.log("content length", content.length)
+    // content.insert(content.length, [brain]);
+    // this.$store.state.core.nodes.forEach((n) => {
+    //   brain.push(n)
+    // });
+
+
+
+
+
   },
   mounted(){
 

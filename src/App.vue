@@ -2,7 +2,7 @@
   <div id="app">
     <GraphView />
     <ListExample/>
-    wss 1
+    wss 3
   </div>
 </template>
 

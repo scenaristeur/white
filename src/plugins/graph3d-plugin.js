@@ -55,7 +55,7 @@ const plugin = {
         //.backgroundColor('#eafaff')
         // .nodeId('id')
         .nodeLabel('name')
-        .nodeAutoColorBy("type")
+        .nodeAutoColorBy("group")
         //.nodeRelSize(5)
         .nodeColor(node => highlight(node) ? 'yellow' : highlightNodes.has(node) ? node === hoverNode ? 'rgb(255,0,0,1)' : 'rgba(255,160,0,0.8)' : node.color)
         //.nodeColor(node => /*highlightNodes.has(node) ? node === hoverNode ? 'rgb(255,0,0,1)' : 'rgba(255,160,0,0.8)' :*/ node.color)

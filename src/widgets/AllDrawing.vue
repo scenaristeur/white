@@ -13,14 +13,14 @@ import mixin from "./mixin";
 import * as d3 from "d3";
 
 let renderPath = d3.svg
-  .line()
-  .x(function(d) {
-    return d[0];
-  })
-  .y(function(d) {
-    return d[1];
-  })
-  .interpolate("basis");
+.line()
+.x(function(d) {
+  return d[0];
+})
+.y(function(d) {
+  return d[1];
+})
+.interpolate("basis");
 
 export default {
   mixins: [mixin],
@@ -37,23 +37,23 @@ export default {
       const drawingCanvas = this.$refs.drawingCanvas;
       d3.select(drawingCanvas).call(
         d3.behavior
-          .drag()
-          .on("dragstart", dragstart)
-          .on("drag", dragmove)
-          .on("dragend", dragend)
+        .drag()
+        .on("dragstart", dragstart)
+        .on("drag", dragmove)
+        .on("dragend", dragend)
       );
 
       var sharedLine = null;
-      function dragstart(e) {
-        console.log(e)
+      function dragstart(/*e*/) {
+        // console.log(e)
         sharedLine = new Y.Array();
         drawing.insert(drawing.length, [sharedLine]);
         disableTouchScroll();
       }
       // After one dragged event is recognized, we ignore them for 33ms.
       var ignoreDrag = null;
-      function dragmove(e) {
-            console.log(e)
+      function dragmove(/*e*/) {
+        // console.log(e)
         if (sharedLine != null && ignoreDrag == null) {
           ignoreDrag = window.setTimeout(function() {
             ignoreDrag = null;

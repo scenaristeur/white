@@ -34,6 +34,42 @@ const state = () => ({
 })
 
 const mutations = {
+  async onContentArrayChange(state,ca){
+    let brains = ca
+
+    for await (const brain of brains) {
+
+      let id = brain._item.id
+      let getId = id.clock - id.client
+      console.log("BRain",getId, id/*, brain*/)
+      for await (const neurone of brain) {
+        console.log("Neuron",neurone)
+
+        neurone.group = getId
+
+        var index = state.nodes.findIndex(x => x.id == neurone.id);
+
+        index === -1 ? state.nodes.push(neurone) : Object.assign(state.nodes[index], neurone)
+        //console.log(state.nodes[index])
+        state.graph.graphData({nodes: state.nodes, links: state.links})
+
+      }
+    }
+
+    // brains.forEach((brain) => {
+    //
+    //   let id = brain._item.id
+    //   let getId = id.clock - id.client
+    //   console.log("BRAIN",brain,brain._item, id, getId)
+    //   brain.forEach((neurone) => {
+    //     console.log("neurone",neurone)
+    //   });
+    //
+    //
+    //
+    // });
+
+  },
   setNodes(state, n){
     state.nodes = n
   },
@@ -65,12 +101,12 @@ const mutations = {
 
         let u = user.user
         if(u!= undefined && u.id != state.user.id){
-        //  console.log(u)
+          //  console.log(u)
           var index = state.nodes.findIndex(x => x.id == u.id);
 
           index === -1 ? state.nodes.push(u) : Object.assign(state.nodes[index], u)
           //console.log(state.nodes[index])
-          state.graph.graphData({nodes: state.nodes, links: state.links})
+          state.graph != undefined ? state.graph.graphData({nodes: state.nodes, links: state.links}) : ""
         }
       });
 

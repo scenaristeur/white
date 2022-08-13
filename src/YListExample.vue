@@ -22,8 +22,8 @@ export default {
     this.$store.commit('core/setAwareness', model.awareness)
     const content = doc.getArray("drawing");
     const contentArray = content.toArray();
-    content.observe(event => {
-      console.log("event", event, event.changes.delta);
+    content.observe(() /*event*/ => {
+      // console.log("event", event, event.changes.delta);
       this.contentArray = content.toArray();
     });
     return {
