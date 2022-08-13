@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <ListExample/>
+    wss
   </div>
 </template>
 

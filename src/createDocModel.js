@@ -5,7 +5,7 @@ import * as Y from "yjs";
 
 const getDoc = id => {
   const ydoc = new Y.Doc();
-  const provider = new WebsocketProvider(`ws:yjs-demos.now.sh`, id, ydoc);
+  const provider = new WebsocketProvider(`wss:yjs-demos.now.sh`, id, ydoc);
   // const provider = new WebsocketProvider(`wss:yjs-demos.now.sh`, id, ydoc);
   const provider_webRtc = new WebrtcProvider('id', ydoc)
 
